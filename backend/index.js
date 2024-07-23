@@ -9,6 +9,9 @@ const app = express();
 const cors = require("cors");
 app.use(cors());
 app.use(express.json());
+app.get("/", (req, res) => {
+  res.send("API is working")
+})
 app.use("/api/auth", authRoutes);
 app.use("/api/favorites", favoritesRoutes);
 app.use("/api/plans", planRoutes);
