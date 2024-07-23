@@ -20,16 +20,23 @@
     height: fit-content;
     position: relative;
     padding: 10px;
-    padding-bottom: 20px;
+    padding:20px;
+    padding-top: 10px;
+    border-radius: 20px;
+    max-height: 80vh;
     .modalRecipeContainer {
       display: flex;
       flex-direction: column;
       gap: 20px;
+    
       .row {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         .close {
+          position: absolute;
+          right: 10px;
+          top: 10px;
           color: var(--text1);
           font-size: 24px;
           cursor: pointer;
@@ -37,12 +44,14 @@
         h1 {
           color: var(--text1);
           font-size: 24px;
+          border-bottom: 2px solid crimson;
+          margin-bottom: 20px;
         }
       }
 
       .favorites {
         display: flex;
-        gap: 10px;
+        gap: 20px;
         flex-wrap: wrap;
         .recipe {
           flex-grow: 1;
@@ -93,8 +102,8 @@
         gap: 10px;
         align-items: center;
         justify-content: center;
-        
         height: 50vh;
+        border-radius: 20px;
         .close{
 position: absolute;
 right: 10px;
