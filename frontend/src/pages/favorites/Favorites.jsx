@@ -5,7 +5,7 @@ import { MdOutlineNoFood } from "react-icons/md";
 import Cookies from "js-cookie";
 import axios from "axios";
 import Loader from "../../components/loader/Loader";
-
+import host from "../../host";
 import { CiImageOff } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 
@@ -20,10 +20,10 @@ const Favorites = () => {
   };
 
   const getSavedRecipes = async () => {
-    const host = "http://localhost:3000/api/favorites/getsavedrecipes";
+    const url = `${host}/api/favorites/getsavedrecipes`;
     try {
       const jwtToken = Cookies.get("recipeJwtToken");
-      const { data } = await axios.get(host, {
+      const { data } = await axios.get(url, {
         headers: {
           "auth-token": jwtToken,
         },

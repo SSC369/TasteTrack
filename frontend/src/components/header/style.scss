@@ -44,7 +44,7 @@
     li {
       cursor: pointer;
       svg {
-        font-size: 30px;
+        font-size: 1.5rem;
         color: var(--text2);
       }
     }
@@ -65,7 +65,7 @@
     li {
       cursor: pointer;
       svg {
-        font-size: 30px;
+        font-size: 1.5rem;
         color: var(--text1);
       }
     }
@@ -80,7 +80,7 @@
         border-radius: 6px;
 
         input {
-          width: 90%;
+          width: 80%;
           background-color: transparent;
           border: none;
           height: 40px;
@@ -94,13 +94,14 @@
           }
         }
         .searchButton {
-          width: 10%;
+          width: 20%;
           height: 40px;
           background-color: transparent;
           border: none;
           display: flex;
           align-items: center;
           justify-content: center;
+        
           cursor: pointer;
           svg {
             font-size: 20px;

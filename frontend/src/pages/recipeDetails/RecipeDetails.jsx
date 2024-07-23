@@ -14,6 +14,7 @@ import { v4 } from "uuid";
 import Cookies from "js-cookie";
 import axios from "axios";
 import ContentWrapper from "../../components/contentWrapper/ContentWrapper";
+import host from '../../host'
 
 const RecipeDetails = () => {
   const { recipeId } = useParams();
@@ -30,7 +31,7 @@ const RecipeDetails = () => {
       includeNutrition: true,
     }
   );
-  console.log(data);
+ 
   const recipeIngredients = [];
   data?.nutrition?.ingredients.forEach((i) => {
     const { id, name, amount, unit } = i;
@@ -52,9 +53,9 @@ const RecipeDetails = () => {
   const handleUnlike = async (recipeId) => {
     setLiked(false);
     try {
-      const host = `http://localhost:3000/api/favorites/unsaverecipe/${recipeId}`;
+      const url = `${host}/api/favorites/unsaverecipe/${recipeId}`;
       const jwtToken = Cookies.get("recipeJwtToken");
-      const { data } = await axios.delete(host, {
+      const { data } = await axios.delete(url, {
         headers: {
           "auth-token": jwtToken,
         },
@@ -71,10 +72,10 @@ const RecipeDetails = () => {
   };
 
   const getSavedRecipes = async () => {
-    const host = "http://localhost:3000/api/favorites/getsavedrecipes";
+    const url = `${host}/api/favorites/getsavedrecipes`;
     try {
       const jwtToken = Cookies.get("recipeJwtToken");
-      const { data } = await axios.get(host, {
+      const { data } = await axios.get(url, {
         headers: {
           "auth-token": jwtToken,
         },
@@ -99,7 +100,7 @@ const RecipeDetails = () => {
 
   const handleLike = async (recipeId) => {
     try {
-      const host = `http://localhost:3000/api/favorites/saverecipe`;
+      const url = `${host}/api/favorites/saverecipe`;
       const jwtToken = Cookies.get("recipeJwtToken");
 
       const recipeNutrients = [];
@@ -117,7 +118,7 @@ const RecipeDetails = () => {
         }
       });
       const res = await axios.post(
-        host,
+        url,
         {
           recipeId,
           image: data?.image,

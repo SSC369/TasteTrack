@@ -5,6 +5,7 @@ import toast, { Toaster } from "react-hot-toast";
 import "./style.scss";
 import axios from "axios";
 import logo from "../../assets/logo.png";
+import host from '../../host'
 
 const Login = () => {
   const [userData, setUserData] = useState({
@@ -39,9 +40,9 @@ const Login = () => {
     const { email, password } = userData;
 
     if (handleValidation()) {
-      const host = `http://localhost:3000/api/auth/login`;
+      const url = `${host}/api/auth/login`;
 
-      const response = await axios.post(host, {
+      const response = await axios.post(url, {
         email,
         password,
       });

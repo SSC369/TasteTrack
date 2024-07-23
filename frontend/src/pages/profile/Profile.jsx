@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import Cookie from "js-cookie";
-import host from "../../host";
 import "./style.scss";
 import axios from "axios";
 import { RxCross2 } from "react-icons/rx";
 import Cookies from "js-cookie";
 import { CgProfile } from "react-icons/cg";
+import host from "../../host";
 
 const toastOptions = {
   duration: 1000,
@@ -41,7 +41,7 @@ const Profile = () => {
         const { username, email } = data.details;
         setUserData({
           name: username,
-          email,
+          email: email,
           password: "",
           confirmPassword: "",
         });
@@ -87,9 +87,9 @@ const Profile = () => {
     const { email, password, name } = userData;
 
     if (handleValidation()) {
-      const host = `http://localhost:3000/api/auth/editprofile`;
+      const url = `${host}/api/auth/editprofile`;
 
-      const response = await axios.put(host, {
+      const response = await axios.put(url, {
         name,
         password,
         email

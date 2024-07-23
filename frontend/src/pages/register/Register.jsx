@@ -6,6 +6,7 @@ import "./style.scss";
 import logo from "../../assets/logo.png";
 
 import axios from "axios";
+import host from "../../host";
 
 const Register = () => {
   const [userData, setUserData] = useState({
@@ -57,9 +58,9 @@ const Register = () => {
     const { email, password, name } = userData;
 
     if (handleValidation()) {
-      const host = `http://localhost:3000/api/auth/register`;
+      const url = `${host}/api/auth/register`;
 
-      const response = await axios.post(host, {
+      const response = await axios.post(url, {
         name,
         password,
         email,
