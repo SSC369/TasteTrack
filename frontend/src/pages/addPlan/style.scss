@@ -108,7 +108,7 @@
 }
 
 .planContainer {
-  min-height: 100vh;
+  min-height: 100dvh;
   min-width: 300px;
   background-color: var(--bg2);
   color: var(--text1);
@@ -263,7 +263,7 @@
       border: none;
       height: 30px;
       border-radius: 8px;
-      max-width: 200px;
+      max-width: 100px;
     }
   }
 }

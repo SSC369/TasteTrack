@@ -92,19 +92,13 @@ const Profile = () => {
       const response = await axios.put(host, {
         name,
         password,
-        email,
+        email
       });
       const { data } = response;
-
       if (data.status) {
         localStorage.setItem("user", JSON.stringify(data.userData));
         Cookie.set("recipeJwtToken", data.jwtToken);
-        setUserData({
-          name: "",
-          password: "",
-          email: "",
-          confirmPassword: "",
-        });
+        
         toast.success("Profile edit Successful", {
           duration: 1000,
         });
@@ -139,7 +133,7 @@ const Profile = () => {
               value={userData.name}
             />
           </div>
-          <div className="inputContainer">
+          <div style={{pointerEvents:"none", opacity:"0.6"}} className="inputContainer">
             <label htmlFor="email">Email</label>
             <input
               name="email"

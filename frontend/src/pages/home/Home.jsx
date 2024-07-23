@@ -128,14 +128,16 @@ const Home = () => {
 
                   {mealPlan?.breakfast?.image ? (
                     <div
-                      onClick={() =>
-                        navigate(`/recipe/${mealPlan?.breakfast?.recipeId}`)
-                      }
+                     
                       className="meal"
                     >
                       <div className="image">
                         {mealPlan?.breakfast?.image ? (
                           <img
+                          style={{cursor:"pointer"}}
+                          onClick={() =>
+                            navigate(`/recipe/${mealPlan?.breakfast?.recipeId}`)
+                          }
                             src={mealPlan?.breakfast?.image}
                             alt={mealPlan?.breakfast?.recipe}
                           />
@@ -170,14 +172,16 @@ const Home = () => {
 
                   {mealPlan?.lunch?.image ? (
                     <div
-                      onClick={() =>
-                        navigate(`/recipe/${mealPlan?.lunch?.recipeId}`)
-                      }
+                      
                       className="meal"
                     >
                       <div className="image">
                         {mealPlan?.lunch?.image ? (
                           <img
+                          style={{cursor:"pointer"}}
+                          onClick={() =>
+                            navigate(`/recipe/${mealPlan?.lunch?.recipeId}`)
+                          }
                             src={mealPlan?.lunch?.image}
                             alt={mealPlan?.lunch?.recipe}
                           />
@@ -213,14 +217,16 @@ const Home = () => {
 
                   {mealPlan?.dinner?.image ? (
                     <div
-                      onClick={() =>
-                        navigate(`/recipe/${mealPlan?.dinner?.recipeId}`)
-                      }
+                     
                       className="meal"
                     >
                       <div className="image">
                         {mealPlan?.dinner?.image ? (
                           <img
+                          style={{cursor:"pointer"}}
+                          onClick={() =>
+                            navigate(`/recipe/${mealPlan?.dinner?.recipeId}`)
+                          }
                             src={mealPlan?.dinner?.image}
                             alt={mealPlan?.dinner?.recipe}
                           />

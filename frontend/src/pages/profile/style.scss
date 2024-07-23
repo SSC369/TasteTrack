@@ -17,7 +17,7 @@
   flex-direction: column;
   align-items: center;
   position: relative;
-  min-height: 100vh;
+  min-height: 100dvh;
   color: var(--text1);
   width: 100%;
   min-width: 300px;
@@ -125,11 +125,12 @@
       border: none;
       font-size: 12px;
       border-radius: 6px;
-      background: tomato;
+      background: orangered;
       color: white;
       font-weight: 400;
       letter-spacing: 0.6px;
       padding: 0px 10px;
+      margin-top: 10px;
       @include md {
         font-size: 14px;
       }

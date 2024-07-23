@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { CiImageOff } from "react-icons/ci";
 import { MdOutlineNoFood } from "react-icons/md";
 import Tags from "../../components/tags/Tags";
+import host from "../../host";
 
 var days = [
   "Sunday",
@@ -66,10 +67,10 @@ const AddPlan = () => {
   };
 
   const getSavedRecipes = async () => {
-    const host = "http://localhost:3000/api/favorites/getsavedrecipes";
+    const url = `${host}/api/favorites/getsavedrecipes`;
     try {
       const jwtToken = Cookies.get("recipeJwtToken");
-      const { data } = await axios.get(host, {
+      const { data } = await axios.get(url, {
         headers: {
           "auth-token": jwtToken,
         },
@@ -182,8 +183,8 @@ const AddPlan = () => {
   const handleSave = async () => {
     if (validatePlan()) {
       try {
-        const host = `${import.meta.env.VITE_SERVER}/api/plans/addplan`;
-        console.log(macro);
+        const url = `${host}/api/plans/addplan`;
+       
         const recipeData = {
           plan: mealPlan,
           macroNutrients: macro,
@@ -191,7 +192,7 @@ const AddPlan = () => {
         };
         const jwtToken = Cookies.get("recipeJwtToken");
 
-        const { data } = await axios.post(host, recipeData, {
+        const { data } = await axios.post(url, recipeData, {
           headers: {
             "auth-token": jwtToken,
           },

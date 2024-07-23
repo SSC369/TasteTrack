@@ -1,6 +1,6 @@
 @import "../../mixins.scss";
 .dayPlanContainer {
-  min-height: 100vh;
+  min-height: 100dvh;
   min-width: 300px;
   background-color: var(--bg2);
   color: var(--text1);
@@ -81,6 +81,7 @@
       }
 
       .col {
+        
         h1 {
           text-align: center;
         }
@@ -107,6 +108,7 @@
             }
           }
           .mealDetails {
+            margin-top: 1rem;
           }
         }
 
