@@ -5,7 +5,7 @@ import { ThemeContext } from "../../context/themeContext";
 
 const Loader = () => {
   return (
-    <div>
+    <div className="loadingContainer">
       <InfinitySpin
         visible={true}
         width="200"

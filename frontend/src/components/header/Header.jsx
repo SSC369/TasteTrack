@@ -9,6 +9,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import logo from "../../assets/logo.png";
+import { RxCross2 } from "react-icons/rx";
 import { CgProfile } from "react-icons/cg";
 import { CiLogin, CiLogout } from "react-icons/ci";
 import { searchContext } from "../../context/searchContext";
@@ -71,7 +72,8 @@ const Header = () => {
           onClick={() => setMenu(!menu)}
           type="button"
         >
-          <RxHamburgerMenu />
+          {menu ? <RxCross2/> :   <RxHamburgerMenu />}
+        
         </div>
 
         {menu && (

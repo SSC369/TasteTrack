@@ -11,7 +11,7 @@
   .contentWrapper {
     display: flex;
     flex-direction: column;
-    align-items: center;
+   
     justify-content: center;
     padding: 10px;
     @include lg {
@@ -61,7 +61,7 @@
         background-color: var(--bg1);
         display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: 12px;
         border-radius: 10px;
         width: fit-content;
         padding-bottom: 20px;
@@ -84,17 +84,24 @@
         .row {
           display: flex;
           gap: 8px;
-          align-items: flex-start;
+          align-items: center;
+         
           span {
-            font-size: 16px;
+            font-size: 12px;
             font-weight: 500;
             color: var(--text1);
+            @include md{
+              font-size: 14px;
+            }
           }
           p {
             word-wrap: break-word;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 500;
             color: var(--text2);
+            @include md{
+              font-size: 16px;
+            }
           }
         }
         .vegan {

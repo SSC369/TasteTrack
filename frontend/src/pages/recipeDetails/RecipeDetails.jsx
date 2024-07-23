@@ -148,9 +148,8 @@ const RecipeDetails = () => {
   return (
     <>
       {loading ? (
-        <div className="loadingContainer">
           <Loader />
-        </div>
+     
       ) : (
         <>
           {error === "Something went wrong!" ? (
@@ -228,12 +227,14 @@ const RecipeDetails = () => {
                     <p>Instructions</p>
                     {!showDetails.instructions ? (
                       <IoMdArrowDropright
+                      style={{cursor:"pointer"}}
                         onClick={() =>
                           setDetails({ ...showDetails, instructions: true })
                         }
                       />
                     ) : (
                       <IoMdArrowDropdown
+                      style={{cursor:"pointer"}}
                         onClick={() =>
                           setDetails({ ...showDetails, instructions: false })
                         }
@@ -251,12 +252,14 @@ const RecipeDetails = () => {
                     <p>Nutrients</p>
                     {!showDetails.nutrients ? (
                       <IoMdArrowDropright
+                      style={{cursor:"pointer"}}
                         onClick={() =>
                           setDetails({ ...showDetails, nutrients: true })
                         }
                       />
                     ) : (
                       <IoMdArrowDropdown
+                      style={{cursor:"pointer"}}
                         onClick={() =>
                           setDetails({ ...showDetails, nutrients: false })
                         }
@@ -283,12 +286,14 @@ const RecipeDetails = () => {
                     <p>Ingredients</p>
                     {!showDetails.ingredients ? (
                       <IoMdArrowDropright
+                      style={{cursor:"pointer"}}
                         onClick={() =>
                           setDetails({ ...showDetails, ingredients: true })
                         }
                       />
                     ) : (
                       <IoMdArrowDropdown
+                      style={{cursor:"pointer"}}
                         onClick={() =>
                           setDetails({ ...showDetails, ingredients: false })
                         }
