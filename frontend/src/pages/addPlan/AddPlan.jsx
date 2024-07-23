@@ -448,6 +448,10 @@ const AddPlan = () => {
                   ) : (
                     <div className="empty">
                       <MdOutlineNoFood />
+                      <CgClose
+                          onClick={() => setRecipeModal("")}
+                          className="close"
+                        />
                       <h1>Basket is Empty</h1>
                       <span>Add Recipes into your basket</span>
                     </div>
