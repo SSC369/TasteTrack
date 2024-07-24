@@ -176,17 +176,18 @@ cursor: pointer;
       }
     }
     .nutrition {
-      width: 80%;
-
+      
+      display: flex;
+      flex-direction: column;
+      width: fit-content;
       @include md {
-        display: flex;
+        flex-direction: row;
         gap: 20px;
         justify-content: center;
         align-items: center;
       }
       .row {
         gap: 6px;
-
         span {
           font-weight: 500;
           font-size: 186x;
@@ -208,13 +209,22 @@ cursor: pointer;
 
       @include md {
         display: flex;
+        justify-content: space-between;;
         flex-direction: row;
+        align-items: flex-start;
         gap: 20px;
         flex-wrap: wrap;
       }
 
       .col {
         width: fit-content;
+        height: fit-content;
+        border-bottom: 2px solid tomato;
+        padding-bottom: 10px;
+        @include md{
+          border-bottom: none;
+          padding: 0;
+        }
         .row {
           display: flex;
           justify-content: space-between;
@@ -235,15 +245,16 @@ cursor: pointer;
           }
         }
         .meal {
+          width: fit-content;
           .image {
             img {
               height: 200px;
-              width: 300px;
+              
               object-fit: contain;
             }
             .noImage {
               height: 200px;
-              width: 300px;
+             
               display: flex;
               flex-direction: column;
               align-items: center;
@@ -255,6 +266,9 @@ cursor: pointer;
                 color: var(--text1);
               }
             }
+          }
+          p{
+            max-width: 200px;
           }
         }
 
@@ -276,7 +290,7 @@ cursor: pointer;
     }
     button {
       width: 80%;
-      background-color: tomato;
+      background-color: orangered;
       color: white;
       border: none;
       height: 30px;

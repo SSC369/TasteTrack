@@ -33,3 +33,26 @@ module.exports.getPlan = async (req, res) => {
     return res.status(500).json({ status: false, msg: "Server issue :(" });
   }
 };
+
+
+module.exports.editPlan = async (req, res) => {
+  try {
+    const { plan, date } = req.body;
+
+    const { email } = req.user.userDetails;
+    // const findPlan = await Plan.findOne({ date, userEmail: email });
+    await Plan.updateOne(
+      { userEmail: email, date },
+      {
+        $set: {
+          plan,
+        },
+      }
+    );
+    
+    return res.status(200).json({ status: true, msg: "Meal Plan Edited :)" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ status: false, msg: "Server issue :(" });
+  }
+};

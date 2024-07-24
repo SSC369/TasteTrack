@@ -37,7 +37,7 @@ body {
 }
 
 .container {
-  min-height: 100vh;
+  min-height: 100dvh;
   min-width: 300px;
   background-color: var(--bg1);
   color: var(--text2);
@@ -45,7 +45,7 @@ body {
 
 .loadingContainer {
   min-height: 100dvh;
-  min-width: 400px;
+  min-width: 300px;
   background-color: var(--bg2);
   color: var(--text1);
   display: flex;

@@ -22,6 +22,9 @@ var days = [
   "Friday",
   "Saturday",
 ];
+const toastOptions = {
+  duration: 1000,
+};
 
 const AddPlan = () => {
   const [mealPlan, setMealPlan] = useState({
@@ -47,7 +50,6 @@ const AddPlan = () => {
       ingredients: [],
     },
   });
-
   const [loading, setLoading] = useState(true);
   const [date, setDate] = useState();
   const [weekDay, setWeekDay] = useState();
@@ -59,14 +61,12 @@ const AddPlan = () => {
   });
   const [recipes, setRecipes] = useState([]);
   const [recipeModal, setRecipeModal] = useState();
-  const toastOptions = {
-    duration: 1000,
-  };
-
+const [edit, setEdit] = useState(false)
+  const jwtToken = Cookies.get("recipeJwtToken");
   const getSavedRecipes = async () => {
     const url = `${host}/api/favorites/getsavedrecipes`;
     try {
-      const jwtToken = Cookies.get("recipeJwtToken");
+    
       const { data } = await axios.get(url, {
         headers: {
           "auth-token": jwtToken,
@@ -95,9 +95,76 @@ const AddPlan = () => {
     setWeekDay(days[present.getDay()]);
     setLoading(false);
   };
+
+
+  const getMealPlan = async(date) => {
+    try {
+      const url = `${host}/api/plans/getplan/${date}`
+      const {data}= await axios.get(url, {
+        headers:{
+          "auth-token":jwtToken
+        }
+      })
+      console.log(data)
+      if(data.recipe === null){
+        setMealPlan({
+          breakfast: {
+            recipe: "",
+            macroNutrients: [],
+            recipeId: "",
+            image: "",
+            ingredients: [],
+          },
+          lunch: {
+            recipe: "",
+            macroNutrients: [],
+            recipeId: "",
+            image: "",
+            ingredients: [],
+          },
+          dinner: {
+            recipe: "",
+            recipeId: "",
+            macroNutrients: [],
+            image: "",
+            ingredients: [],
+          },
+        })
+        setMacro({
+          protein: 0,
+          carbohydrates: 0,
+          fat: 0,
+          calories: 0,
+        })
+        setEdit(false)
+        return
+      }
+      if(data?.status === true){
+        setMealPlan(data?.recipe?.plan)
+        setMacro(data?.recipe?.macroNutrients)
+        const {breakfast, lunch, dinner} = data?.recipe?.plan
+        if(breakfast.recipeId !== "", lunch.recipeId !== "" ,dinner.recipeId !== ""){
+          setEdit(true)
+        }
+      }
+    } catch (error) {
+      toast.error(error.message, {duration:1000})
+    }
+  }
+
+
   useEffect(() => {
-    getPlan();
+       getPlan();
   }, []);
+
+  useEffect(() => {
+    if(date?.length > 0){
+      getMealPlan(date)    
+    }
+    
+  }, [date])
+
+
 
   const handleLeftDay = () => {
     const leftDay = new Date(date);
@@ -171,7 +238,7 @@ const AddPlan = () => {
 
   const validatePlan = () => {
     const { breakfast, dinner, lunch } = mealPlan;
-    if (!breakfast && !dinner && !lunch) {
+    if (breakfast.recipeId === "" && dinner.recipeId === "" && lunch.recipeId === "") {
       return false;
     }
     return true;
@@ -194,7 +261,44 @@ const AddPlan = () => {
             "auth-token": jwtToken,
           },
         });
-        console.log(data);
+        if (data.status) {
+          toast.success(data.msg, { duration: 1000 });
+          setEdit(true)
+        } else {
+          toast.error(data.msg, { duration: 1000 });
+        }
+      } catch (error) {
+        console.log(error);
+        toast.error("Something went wrong!", { duration: 1000 });
+      }
+    }else{
+      toast.error("Invalid Plan !", {duration:1000})
+    }
+  };
+
+  const handleDateChange = (e) => {
+    const day = new Date(e.target.value);
+    setWeekDay(days[day.getDay()]);
+    setDate(`${day.getFullYear()}-${day.getMonth() + 1}-${day.getDate()}`);
+  };
+
+  const handleEdit = async() => {
+    if (validatePlan()) {
+      try {
+        const url = `${host}/api/plans/editplan`;
+       
+        const recipeData = {
+          plan: mealPlan,
+          macroNutrients: macro,
+          date: date,
+        };
+
+        const { data } = await axios.put(url, recipeData, {
+          headers: {
+            "auth-token": jwtToken,
+          },
+        });
+      
         if (data.status) {
           toast.success(data.msg, { duration: 1000 });
         } else {
@@ -204,14 +308,10 @@ const AddPlan = () => {
         console.log(error);
         toast.error("Something went wrong!", { duration: 1000 });
       }
+    }else{
+      toast.error("Invalid Plan !", {duration:1000})
     }
-  };
-
-  const handleDateChange = (e) => {
-    const day = new Date(e.target.value);
-    setWeekDay(days[day.getDay()]);
-    setDate(`${day.getFullYear()}-${day.getMonth() + 1}-${day.getDate()}`);
-  };
+  }
 
   return (
     <>
@@ -239,19 +339,19 @@ const AddPlan = () => {
               <div className="nutrition">
                 <div className="row">
                   <span>Protein:</span>
-                  <p>{macro.protein.toFixed(2)} g</p>
+                  <p>{macro?.protein?.toFixed(2)} g</p>
                 </div>
                 <div className="row">
                   <span>Carbohydrates:</span>
-                  <p>{macro.carbohydrates.toFixed(2)} g</p>
+                  <p>{macro?.carbohydrates?.toFixed(2)} g</p>
                 </div>
                 <div className="row">
                   <span>Fat:</span>
-                  <p>{macro.fat.toFixed(2)} g</p>
+                  <p>{macro?.fat?.toFixed(2)} g</p>
                 </div>
                 <div className="row">
                   <span>Calories:</span>
-                  <p>{macro.calories.toFixed(2)} kcal</p>
+                  <p>{macro?.calories?.toFixed(2)} kcal</p>
                 </div>
               </div>
 
@@ -261,7 +361,7 @@ const AddPlan = () => {
                   <div className="row">
                     <h1>Breakfast Recipe</h1>
 
-                    {mealPlan.breakfast.recipeId && (
+                    {mealPlan.breakfast?.recipeId && (
                       <div
                         onClick={() => handleCancel("breakfast")}
                         className="close"
@@ -383,9 +483,18 @@ const AddPlan = () => {
                   )}
                 </div>
               </div>
-              <button
+              {edit && <button  style={
+                  mealPlan.lunch.recipeId === "" && mealPlan.breakfast.recipeId === "" && mealPlan.dinner.recipeId === ""
+                    ? { opacity: "0.5", pointerEvents: "none" }
+                    : {}
+                }
+                onClick={handleEdit}
+                type="button">
+                Edit
+              </button>}
+             {!edit && <button
                 style={
-                  !mealPlan.lunch && !mealPlan.breakfast && !mealPlan.dinner
+                  mealPlan.lunch.recipeId === "" && mealPlan.breakfast.recipeId === "" && mealPlan.dinner.recipeId === ""
                     ? { opacity: "0.5", pointerEvents: "none" }
                     : {}
                 }
@@ -393,7 +502,7 @@ const AddPlan = () => {
                 type="button"
               >
                 Save
-              </button>
+              </button>}
             </div>
           </div>
 
